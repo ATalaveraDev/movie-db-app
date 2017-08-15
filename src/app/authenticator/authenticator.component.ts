@@ -46,6 +46,5 @@ export class AuthenticatorComponent implements OnInit {
       .then(response => {
         window.location.href = 'https://www.themoviedb.org/authenticate/' + response.json().request_token + '?redirect_to=http://localhost:4200/authenticate?key=' + this.form.value.key;
       });
-    // f7ec992df76db1710870311caf0696b6
   }
 }
