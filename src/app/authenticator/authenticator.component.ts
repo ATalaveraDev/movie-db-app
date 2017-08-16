@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Token } from './authenticator.token';
 import { AppService } from '../app.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import 'rxjs/add/operator/map';
-import { UserAccount } from '../movies/userAccount';
+import { Session } from '../app.session';
 
 @Component({
   selector: 'app-authenticator',
@@ -28,7 +27,7 @@ export class AuthenticatorComponent implements OnInit {
 
         this.appService.createSession(this.appService.getApiKey(), this.appService.getToken())
           .then(response => {
-            this.appService.setSession(response.json().session_id);
+            this.appService.setSession(response.json());
 
             this.appService.getUserAccount(this.appService.getApiKey(), this.appService.getSession())
               .then(response => {

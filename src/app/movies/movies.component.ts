@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { UserAccount } from './userAccount';
+import { UserAccount } from '../app.user.account';
 import { AppService } from '../app.service';
 import 'rxjs/add/operator/toPromise';
 
@@ -20,7 +20,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void { }
 
   getMovies(id): any {
-    return this.http.get('https://api.themoviedb.org/3/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession())
+    return this.http.get('https://api.themoviedb.org/3/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession().session_id)
       .toPromise()
       .then(response => this.list = response.json().results);
   }
