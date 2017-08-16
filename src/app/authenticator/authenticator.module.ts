@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticatorComponent } from './authenticator.component';
-import { AppService } from '../app.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -14,9 +13,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [
     AuthenticatorComponent
-  ],
-  providers: [
-    AppService
   ]
 })
 export class AuthenticatorModule { }
