@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { UserAccount } from './app.user.account';
 import { Session } from './app.session';
+import { Constants } from './app.constants';
 
 @Injectable()
 export class AppService {
@@ -22,7 +23,7 @@ export class AppService {
   }
 
   createToken(key: string): Promise<Response> {
-    return this.http.get('https://api.themoviedb.org/3/authentication/token/new?api_key=' + key)
+    return this.http.get(Constants.END_POINT + '/authentication/token/new?api_key=' + key)
       .toPromise();
   }
 
@@ -35,7 +36,7 @@ export class AppService {
   }
 
   createSession(key, token): Promise<Response> {
-    return this.http.get('https://api.themoviedb.org/3/authentication/session/new?api_key=' + key + '&request_token=' + token)
+    return this.http.get(Constants.END_POINT + '/authentication/session/new?api_key=' + key + '&request_token=' + token)
       .toPromise();
   }
 
@@ -48,7 +49,7 @@ export class AppService {
   }
 
   getUserAccount(key: string, session: Session): Promise<Response> {
-    return this.http.get('https://api.themoviedb.org/3/account?api_key=' + key + '&session_id=' + session.session_id)
+    return this.http.get(Constants.END_POINT + '/account?api_key=' + key + '&session_id=' + session.session_id)
       .toPromise();
   }
 
