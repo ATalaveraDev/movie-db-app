@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { UserAccount } from '../app.user.account';
 import { AppService } from '../app.service';
 import 'rxjs/add/operator/toPromise';
+import { Constants } from '../app.constants';
 
 @Component({
   selector: 'app-movies',
@@ -20,7 +21,7 @@ export class MoviesComponent implements OnInit {
   ngOnInit(): void { }
 
   getMovies(id): any {
-    return this.http.get('https://api.themoviedb.org/3/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession().session_id)
+    return this.http.get(Constants.END_POINT + '/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession().session_id)
       .toPromise()
       .then(response => this.list = response.json().results);
   }
