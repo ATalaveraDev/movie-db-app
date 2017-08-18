@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+
+import 'rxjs/add/operator/toPromise';
+
 import { UserAccount } from '../app.user.account';
 import { AppService } from '../app.service';
-import 'rxjs/add/operator/toPromise';
 import { Constants } from '../app.constants';
 
 @Component({
