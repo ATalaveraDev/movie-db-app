@@ -6,7 +6,6 @@ import { MoviesComponent } from './movies.component';
 import { SearchMoviesModule } from './search/search.module';
 import { MoviesRoutingModule } from './movies.routing.module';
 import { ListMoviesModule } from './list/list.module';
-import { MovieModule } from './list/movie/movie.module';
 
 @NgModule({
   imports: [
