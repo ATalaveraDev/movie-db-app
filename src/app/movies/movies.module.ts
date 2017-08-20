@@ -3,19 +3,22 @@ import { CommonModule } from  '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MoviesComponent } from './movies.component';
-import { ListComponent } from './list/list.component';
-import { MovieComponent } from './list/movie/movie.component';
+import { SearchMoviesModule } from './search/search.module';
+import { MoviesRoutingModule } from './movies.routing.module';
+import { ListMoviesModule } from './list/list.module';
+import { MovieModule } from './list/movie/movie.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SearchMoviesModule,
+    ListMoviesModule,
+    MoviesRoutingModule
   ],
   declarations: [
-    MoviesComponent,
-    ListComponent,
-    MovieComponent
+    MoviesComponent
   ],
   providers: []
 })

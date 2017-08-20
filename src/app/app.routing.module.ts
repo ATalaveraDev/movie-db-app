@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MoviesComponent } from './movies/movies.component';
 import { AuthenticatorComponent } from './authenticator/authenticator.component';
 
 const appRoutes: Routes = [
   {
     path: 'movies',
-    component: MoviesComponent
+    loadChildren: './movies/movies.module#MoviesModule'
   },
   {
     path: 'authenticate',

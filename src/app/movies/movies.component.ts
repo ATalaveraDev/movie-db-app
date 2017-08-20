@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
-
-import { UserAccount } from '../app.user.account';
-import { AppService } from '../app.service';
-import { Constants } from '../app.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -13,18 +8,12 @@ import { Constants } from '../app.constants';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  private list: any;
-  private account: UserAccount;
+  constructor(private router: Router) { }
 
-  constructor(private http: Http, private appService: AppService) {
-    this.getMovies(this.appService.getAccount().id);
-  }
 
   ngOnInit(): void { }
 
-  getMovies(id): any {
-    return this.http.get(Constants.END_POINT + '/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession().session_id)
-      .toPromise()
-      .then(response => this.list = response.json().results);
+  goto() {
+    this.router.navigate(['/movies/search'])
   }
 }

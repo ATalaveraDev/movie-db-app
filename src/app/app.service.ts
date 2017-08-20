@@ -10,7 +10,7 @@ import { Constants } from './app.constants';
 @Injectable()
 export class AppService {
   private session: Session;
-  private account: UserAccount;
+  account: UserAccount;
   private apiKey: string;
   private token: string;
 
