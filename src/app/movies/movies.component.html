@@ -1,1 +1,6 @@
-<router-outlet></router-outlet>
+<div class="col-lg-6">
+  <app-list (movieClicked)="onClickMovie($event)"></app-list>
+</div>
+<div class="col-lg-6">
+  <movie-detail [selectedMovie]="selectedMovie"></movie-detail>
+</div>

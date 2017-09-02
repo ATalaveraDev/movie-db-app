@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Movie } from './list/movie/movie.model';
 
 @Component({
   selector: 'app-movies',
@@ -6,5 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent {
+  selectedMovie: Movie;
+
   constructor() { }
+
+  onClickMovie(movie) {
+    this.selectedMovie = movie;
+  }
 }
