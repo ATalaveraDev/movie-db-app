@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticatorComponent } from './authenticator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [
     AuthenticatorComponent
+  ],
+  providers: [
+    CookieService
   ]
 })
 export class AuthenticatorModule { }

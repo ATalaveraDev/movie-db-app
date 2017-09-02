@@ -1,4 +1,4 @@
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { UserAccount } from './app.user.account';
 import { Session } from './app.session';
 import { Constants } from './app.constants';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -14,7 +15,7 @@ export class AppService {
   private apiKey: string;
   private token: string;
 
-  constructor(private http: Http) { }
+  constructor(private httpClient: HttpClient) { }
 
   getApiKey(): string {
     return this.apiKey;
@@ -24,9 +25,11 @@ export class AppService {
     this.apiKey = key;
   }
 
-  createToken(key: string): Promise<Response> {
-    return this.http.get(Constants.END_POINT + '/authentication/token/new?api_key=' + key)
-      .toPromise();
+  createToken(key: string): Observable<any> {
+    return this.httpClient.get<any>(Constants.END_POINT + '/authentication/token/new?api_key=' + key)
+        .map(response => {
+          return response;
+        });
   }
 
   getToken(): string {
@@ -37,9 +40,11 @@ export class AppService {
     this.token = token;
   }
 
-  createSession(key, token): Promise<Response> {
-    return this.http.get(Constants.END_POINT + '/authentication/session/new?api_key=' + key + '&request_token=' + token)
-      .toPromise();
+  createSession(key, token): Observable<any> {
+    return this.httpClient.get<Session>(Constants.END_POINT + '/authentication/session/new?api_key=' + key + '&request_token=' + token)
+        .map(response => {
+          return response;
+        });
   }
 
   getSession(): Session {
@@ -50,9 +55,11 @@ export class AppService {
     this.session = session;
   }
 
-  getUserAccount(key: string, session: Session): Promise<Response> {
-    return this.http.get(Constants.END_POINT + '/account?api_key=' + key + '&session_id=' + session.session_id)
-      .toPromise();
+  getUserAccount(key: string, session: Session): Observable<UserAccount> {
+    return this.httpClient.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + key + '&session_id=' + session.session_id)
+        .map(response => {
+          return response;
+        });
   }
 
   getAccount(): UserAccount {
@@ -61,5 +68,25 @@ export class AppService {
 
   setAccount(account: UserAccount): void {
     this.account = account;
+  }
+
+  readAuthenticationStatus(token): Observable<any> {
+    console.log(token);
+    return this.httpClient.post<any>('http://localhost:8080/authentication/data', {token: token})
+      .map((response) => {
+        this.setAccount(response.account);
+        this.setSession(response.session);
+        this.setApiKey(response.apiKey)
+      });
+  }
+
+  saveUserInfo(): Observable<any> {
+    let userInfo = {
+      account: this.getAccount(),
+      apiKey: this.getApiKey(),
+      session: this.getSession()
+    };
+
+    return this.httpClient.post('http://localhost:8080/authentication', userInfo);
   }
 }
