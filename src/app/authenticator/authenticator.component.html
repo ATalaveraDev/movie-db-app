@@ -1,4 +1,10 @@
-<div class="row">
+<div class="row" *ngIf="checkingAuthentication">
+  <div class="col-lg-12 text-center">
+    <span class="glyphicon glyphicon-cloud" aria-hidden="true"></span>
+    <h3>Checking authentication</h3>
+  </div>
+</div>
+<div class="row" *ngIf="!checkingAuthentication">
   <form novalidate [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group col-md-6 col-md-offset-3">
       <input class="form-control text-center" type="text" placeholder="Movie DB API_KEY" formControlName="key">

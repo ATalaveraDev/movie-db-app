@@ -15,17 +15,22 @@ import { UserAccount } from '../app.user.account';
 })
 export class AuthenticatorComponent implements OnInit {
   private form: FormGroup;
+  checkingAuthentication: Boolean;
 
   constructor(private appService: AppService, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
-    if (this.cookieService.get('token')) {
-      this.appService.readAuthenticationStatus(this.cookieService.get('token'))
-          .subscribe(() => {
-            this.router.navigate(['/movies']);
-          });
-    }
-  }
+    this.checkingAuthentication = true;
 
-  ngOnInit(): void {
+    setTimeout( () => {
+      if (this.cookieService.get('token')) {
+        this.appService.readAuthenticationStatus(this.cookieService.get('token'))
+            .subscribe(() => {
+              this.router.navigate(['/movies']);
+            });
+      } else {
+        this.checkingAuthentication = false;
+      }
+    }, 3000);
+
     this.form = new FormGroup({
       key: new FormControl('', Validators.required)
     });
@@ -38,6 +43,9 @@ export class AuthenticatorComponent implements OnInit {
         this.authenticateAndNavigate();
       }
     });
+  }
+
+  ngOnInit(): void {
   }
 
   authenticateAndNavigate(): void {
