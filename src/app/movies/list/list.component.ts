@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { AppService } from '../../app.service';
+import { Movie } from './movie/movie.model';
 import { Constants } from '../../app.constants';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list',
@@ -11,23 +12,26 @@ import { Constants } from '../../app.constants';
   styleUrls: ['list.component.css']
 })
 export class ListMoviesComponent implements OnInit {
-  list: any;
+  list: Array<Movie>;
+  @Output() movieClicked = new EventEmitter<any>();
 
-  constructor(private http: Http, private appService: AppService) {
-  }
+  constructor(private http: HttpClient, private appService: AppService) { }
 
   ngOnInit() {
     this.getMovies(this.appService.getAccount().id);
-
   }
 
   getMovies(id): any {
     return this.http.get(Constants.END_POINT + '/account/' + id + '/watchlist/movies?api_key=' + this.appService.getApiKey() + '&session_id=' + this.appService.getSession().session_id)
-      .toPromise()
-      .then(response => this.list = response.json().results);
+      .map((response: any) => this.list = response.results)
+      .subscribe();
   }
 
   tracker(index, item) {
     return item.id;
+  }
+
+  onClickMovie(movie) {
+    this.movieClicked.emit(movie);
   }
 }
