@@ -41,3 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 api_key.txt
+server/db.js
