@@ -20,16 +20,14 @@ export class AuthenticatorComponent implements OnInit {
   constructor(private appService: AppService, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
     this.checkingAuthentication = true;
 
-    setTimeout( () => {
-      if (this.cookieService.get('token')) {
-        this.appService.readAuthenticationStatus(this.cookieService.get('token'))
-            .subscribe(() => {
-              this.router.navigate(['/movies']);
-            });
-      } else {
-        this.checkingAuthentication = false;
-      }
-    }, 3000);
+    if (this.cookieService.get('token')) {
+      this.appService.readAuthenticationStatus(this.cookieService.get('token'))
+          .subscribe(() => {
+            this.router.navigate(['/movies']);
+          });
+    } else {
+      this.checkingAuthentication = false;
+    }
 
     this.form = new FormGroup({
       key: new FormControl('', Validators.required)
