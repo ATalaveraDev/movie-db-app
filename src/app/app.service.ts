@@ -71,7 +71,6 @@ export class AppService {
   }
 
   readAuthenticationStatus(token): Observable<any> {
-    console.log(token);
     return this.httpClient.post<any>('http://localhost:8080/authentication/data', {token: token})
       .map((response) => {
         this.setAccount(response.account);
