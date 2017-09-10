@@ -7,6 +7,7 @@ import { UserAccount } from './app.user.account';
 import { Session } from './app.session';
 import { Constants } from './app.constants';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AppService {
@@ -15,14 +16,14 @@ export class AppService {
   private apiKey: string;
   private token: string;
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
 
   getApiKey(): string {
-    return this.apiKey;
+    return this.cookieService.get('apiKey');
   }
 
   setApiKey(key: string): void {
-    this.apiKey = key;
+    this.cookieService.set('apiKey', key);
   }
 
   createToken(key: string): Observable<any> {
@@ -33,17 +34,17 @@ export class AppService {
   }
 
   getToken(): string {
-    return this.token;
+    return this.cookieService.get('token');
   }
 
   setToken(token: string): void {
-    this.token = token;
+    this.cookieService.set('token', token);
   }
 
   createSession(key, token): Observable<any> {
     return this.httpClient.get<Session>(Constants.END_POINT + '/authentication/session/new?api_key=' + key + '&request_token=' + token)
         .map(response => {
-          return response;
+          this.setSession(response);
         });
   }
 
@@ -53,13 +54,14 @@ export class AppService {
 
   setSession(session: Session): void {
     this.session = session;
+    this.cookieService.set('session', session.session_id);
   }
 
-  getUserAccount(key: string, session: Session): Observable<UserAccount> {
-    return this.httpClient.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + key + '&session_id=' + session.session_id)
-        .map(response => {
-          return response;
-        });
+  createUserAccount(): Observable<void> {
+    return this.httpClient.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + this.getApiKey() + '&session_id=' + this.getSession().session_id)
+      .map(response => {
+        this.setAccount(response);
+      });
   }
 
   getAccount(): UserAccount {
@@ -68,24 +70,6 @@ export class AppService {
 
   setAccount(account: UserAccount): void {
     this.account = account;
-  }
-
-  readAuthenticationStatus(token): Observable<any> {
-    return this.httpClient.post<any>('http://localhost:8080/authentication/data', {token: token})
-      .map((response) => {
-        this.setAccount(response.account);
-        this.setSession(response.session);
-        this.setApiKey(response.apiKey)
-      });
-  }
-
-  saveUserInfo(): Observable<any> {
-    let userInfo = {
-      account: this.getAccount(),
-      apiKey: this.getApiKey(),
-      session: this.getSession()
-    };
-
-    return this.httpClient.post('http://localhost:8080/authentication', userInfo);
+    this.cookieService.set('accountId', account.id.toString());
   }
 }
