@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-  <app-list (movieClicked)="onClickMovie($event)"></app-list>
+  <app-list (movieClicked)="onClickMovie($event)" [list]="moviesService.list$ | async"></app-list>
 </div>
 <div class="col-lg-6" *ngIf="selectedMovie">
   <movie-detail [selectedMovie]="selectedMovie"></movie-detail>
