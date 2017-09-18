@@ -11,11 +11,11 @@ import { AppService } from '../../app.service';
 })
 export class MovieDetailComponent implements OnChanges {
   @Input() selectedMovie: Movie;
-  movie;
+  movie: Movie;
 
   constructor(private httpClient: HttpClient, private appService: AppService) { }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.httpClient.get(Constants.END_POINT + '/movie/' + this.selectedMovie.id + '?api_key=' + this.appService.getApiKey())
         .map((response: any) => this.movie = response)
         .subscribe();
