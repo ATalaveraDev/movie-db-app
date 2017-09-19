@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Movie } from './list/movie/movie.model';
 import { MoviesService } from '../movies.service';
 
 @Component({
@@ -10,13 +9,11 @@ import { MoviesService } from '../movies.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent {
-  selectedMovie: Movie;
-
   constructor(private moviesService: MoviesService) {
     this.moviesService.getMovies();
   }
 
-  onClickMovie(movie) {
-    this.selectedMovie = movie;
+  onClickMovie(movie): void {
+    this.moviesService.selectMovie(movie.id);
   }
 }

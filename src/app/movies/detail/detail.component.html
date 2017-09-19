@@ -1,24 +1,24 @@
-<h1>{{movie?.title}}</h1>
+<h1>{{movie$?.title}}</h1>
 <div class="row">
     <div class="col-lg-3">
-        <img src="https://image.tmdb.org/t/p/w154{{movie?.poster_path}}" alt="">
+        <img src="https://image.tmdb.org/t/p/w154{{movie$?.poster_path}}" alt="">
     </div>
     <div class="col-lg-9">
         <div class="row">
             <div class="col-lg-10">
                 <div class="form-group">
                     <label>Release date:</label>
-                    <p>{{movie?.release_date}}</p>
+                    <p>{{movie$?.release_date}}</p>
                 </div>
             </div>
             <div class="col-lg-2">
-                <p>{{movie?.vote_average}}</p>
+                <p>{{movie$?.vote_average}}</p>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 form-group">
                 <label>Overview:</label>
-                <p>{{movie?.overview}}</p>
+                <p>{{movie$?.overview}}</p>
             </div>
         </div>
     </div>
