@@ -10,7 +10,6 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div *ngFor="let movie of service.list$ | async"
-       class="col-lg-6">{{movie.title}}</div>
+<div class="row items-container">
+  <movie-search-item *ngFor="let movie of service.list$ | async" [movie]="movie" class="col-lg-6"></movie-search-item>
 </div>
