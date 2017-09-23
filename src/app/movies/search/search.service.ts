@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Constants } from '../../app.constants';
 import { AppService } from '../../app.service';
-import { ReplaySubject, Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 import { Movie } from '../list/movie/movie.model';
 
 @Injectable()
