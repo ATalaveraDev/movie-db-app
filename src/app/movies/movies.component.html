@@ -1,6 +1,5 @@
-<div class="col-lg-6">
-  <app-list (movieClicked)="onClickMovie($event)" [list$]="moviesService.list$"></app-list>
-</div>
-<div class="col-lg-6" *ngIf="moviesService.movie$ | async as movie">
-  <movie-detail [movie$]="movie"></movie-detail>
+<div class="row">
+  <div class="col-lg-12">
+    <router-outlet></router-outlet>
+  </div>
 </div>

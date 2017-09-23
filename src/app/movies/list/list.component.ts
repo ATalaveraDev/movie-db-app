@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Output, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { Movie } from './movie/movie.model';
+import { MoviesService } from '../../movies.service';
 
 @Component({
   selector: 'app-list',
@@ -10,16 +9,15 @@ import { Movie } from './movie/movie.model';
   styleUrls: ['list.component.css']
 })
 export class ListMoviesComponent {
-  @Input() list$: Observable<Movie>;
-  @Output() movieClicked = new EventEmitter<any>();
-
-  constructor() { }
+  constructor(private moviesService: MoviesService) {
+    this.moviesService.getMovies();
+  }
 
   tracker(index, item): number {
     return item.id;
   }
 
   onClickMovie(movie): void {
-    this.movieClicked.emit(movie);
+    this.moviesService.selectMovie(movie.id);
   }
 }

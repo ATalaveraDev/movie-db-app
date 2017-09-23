@@ -9,11 +9,5 @@ import { MoviesService } from '../movies.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent {
-  constructor(private moviesService: MoviesService) {
-    this.moviesService.getMovies();
-  }
-
-  onClickMovie(movie): void {
-    this.moviesService.selectMovie(movie.id);
-  }
+  constructor() { }
 }
