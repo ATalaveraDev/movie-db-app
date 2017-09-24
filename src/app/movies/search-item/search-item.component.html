@@ -1,9 +1,12 @@
-<div class="row frame">
+<div class="row frame" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
   <div class="col-lg-2">
     <img src="https://image.tmdb.org/t/p/w92{{movie?.poster_path}}" alt="">
   </div>
   <div class="col-lg-10">
     <p>{{movie.title}}</p>
-    <p>{{movie.overview}}</p>
+    <p>{{movie.overview.substring(0, 399)}}<span *ngIf="(movie.overview.length > 399)">...</span></p>
+  </div>
+  <div class="options" *ngIf="mouseIsOver">
+
   </div>
 </div>

@@ -9,6 +9,17 @@ import { Movie } from '../list/movie/movie.model';
 })
 export class SearchItemComponent {
   @Input() movie: Movie;
+  mouseIsOver: boolean;
 
-  constructor() { }
+  constructor() {
+    this.mouseIsOver = false;
+  }
+
+  onMouseEnter() {
+    this.mouseIsOver = true;
+  }
+
+  onMouseLeave() {
+    this.mouseIsOver = false;
+  }
 }
