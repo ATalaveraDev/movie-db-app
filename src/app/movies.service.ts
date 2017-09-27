@@ -30,4 +30,12 @@ export class MoviesService {
                 this.movieSubject.next(response);
             }).subscribe();
     }
+
+    addMovieToWatchList(id) {
+        this.http.post(Constants.END_POINT + '/account/' + this.cookieService.get('accountId') + '/watchlist?api_key=' + this.appService.getApiKey() + '&session_id=' + this.cookieService.get('session'), {
+            "media_type": "movie",
+            "media_id": id,
+            "watchlist": true
+        }).subscribe();
+    }
 }

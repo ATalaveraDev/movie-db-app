@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Movie } from '../list/movie/movie.model';
+import { MoviesService } from '../../movies.service';
 
 @Component({
   selector: 'movie-search-item',
@@ -11,15 +12,19 @@ export class SearchItemComponent {
   @Input() movie: Movie;
   mouseIsOver: boolean;
 
-  constructor() {
+  constructor(private moviesService: MoviesService) {
     this.mouseIsOver = false;
   }
 
-  onMouseEnter() {
+  onMouseEnter(): void {
     this.mouseIsOver = true;
   }
 
-  onMouseLeave() {
+  onMouseLeave(): void {
     this.mouseIsOver = false;
+  }
+
+  addMovie(id): void {
+    this.moviesService.addMovieToWatchList(id);
   }
 }

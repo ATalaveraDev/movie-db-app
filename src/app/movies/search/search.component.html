@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="text-center">Search</h1>
-    <div class="col-lg-6 col-lg-offset-3">
+    <div class="col-sm-6 col-sm-offset-3">
       <input type="text"
              class="form-control"
              #searchTerm
@@ -11,5 +11,5 @@
   </div>
 </div>
 <div class="row items-container">
-  <movie-search-item *ngFor="let movie of service.list$ | async" [movie]="movie" class="col-lg-6"></movie-search-item>
+  <movie-search-item *ngFor="let movie of service.list$ | async" [movie]="movie" class="col-lg-6 col-xs-12"></movie-search-item>
 </div>
