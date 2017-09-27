@@ -8,6 +8,7 @@ import { MoviesRoutingModule } from './movies.routing.module';
 import { ListMoviesModule } from './list/list.module';
 import { MovieDetailModule } from './detail/detail.module';
 import { MoviesService } from '../movies.service';
+import { ListsModule } from './lists/lists.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { MoviesService } from '../movies.service';
     SearchMoviesModule,
     ListMoviesModule,
     MovieDetailModule,
-    MoviesRoutingModule
+    MoviesRoutingModule,
+    ListsModule
   ],
   declarations: [
     MoviesComponent
