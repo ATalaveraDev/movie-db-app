@@ -20,6 +20,6 @@ export class ListsService {
 
   createList(info) {
     this.http.post(Constants.END_POINT + '/list?api_key=' + this.appService.getApiKey() + '&session_id=' + this.cookieService.get('session'), info)
-      .subscribe()
+      .subscribe();
   }
 }
