@@ -19,4 +19,8 @@ export class ListsComponent {
   createList() {
     this.service.createList(this.list);
   }
+
+  delete(id) {
+    this.service.deleteList(id);
+  }
 }

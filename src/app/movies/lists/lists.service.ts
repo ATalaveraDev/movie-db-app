@@ -22,4 +22,9 @@ export class ListsService {
     this.http.post(Constants.END_POINT + '/list?api_key=' + this.appService.getApiKey() + '&session_id=' + this.cookieService.get('session'), info)
       .subscribe();
   }
+
+  deleteList(id) {
+    this.http.delete(Constants.END_POINT + '/list/' + id + '?api_key=' + this.appService.getApiKey() + '&session_id=' + this.cookieService.get('session'))
+      .subscribe();
+  }
 }
