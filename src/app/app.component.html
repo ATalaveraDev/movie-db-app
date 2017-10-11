@@ -1,5 +1,5 @@
 <nav class="navbar navbar-inverse">
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse" [ngClass]="{'sub-views-displayed': subViews.length > 0}">
     <ul class="nav navbar-nav">
       <li>
         <a routerLink="/movies" routerLinkActive="active">Movies</a>
@@ -9,6 +9,16 @@
       </li>
       <li>
         <a routerLink="/movies/lists" routerLinkActive="active">Lists</a>
+      </li>
+      <li>
+        <a routerLink="/shows" routerLinkActive="active">Shows</a>
+      </li>
+    </ul>
+  </div>
+  <div class="collapse navbar-collapse" *ngIf="subViews.length > 0">
+    <ul class="nav navbar-nav sub-views">
+      <li class="nav-item" *ngFor="let option of subViews">
+        <a class="nav-link sub-link">{{option.name}}</a>
       </li>
     </ul>
   </div>

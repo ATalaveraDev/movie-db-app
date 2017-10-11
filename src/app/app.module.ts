@@ -8,6 +8,7 @@ import { MoviesModule } from './movies/movies.module';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthenticatorModule } from './authenticator/authenticator.module';
 import { AppService } from './app.service';
+import { ShowsModule } from 'app/shows/shows.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppService } from './app.service';
     HttpClientModule,
     MoviesModule,
     AuthenticatorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ShowsModule
   ],
   providers: [
     AppService

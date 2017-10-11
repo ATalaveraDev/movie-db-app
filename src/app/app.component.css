@@ -1,0 +1,12 @@
+.sub-views-displayed a {
+    padding-bottom: 5px;
+}
+
+.nav.navbar-nav.sub-views {
+    margin-left: 25px;
+}
+
+.nav-link.sub-link {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
