@@ -20,7 +20,7 @@ export class AppComponent {
           this.subViews = [{name: 'On Air'}, {name: 'Latest'}];
           break;
         default:
-        this.subViews = [];
+          this.subViews = [];
       }
     });
   }
