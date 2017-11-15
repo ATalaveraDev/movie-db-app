@@ -10,6 +10,8 @@ import { AuthenticatorModule } from './authenticator/authenticator.module';
 import { AppService } from './app.service';
 import { ShowsModule } from 'app/shows/shows.module';
 
+import { ListsModule } from './lists/lists.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,7 +23,9 @@ import { ShowsModule } from 'app/shows/shows.module';
     MoviesModule,
     AuthenticatorModule,
     AppRoutingModule,
-    ShowsModule
+    ShowsModule,
+
+    ListsModule
   ],
   providers: [
     AppService
