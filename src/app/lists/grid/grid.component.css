@@ -1,0 +1,13 @@
+.row-big-frame {
+  height: 298px;
+  background-color: crimson;
+}
+
+.row-medium-frame {
+  height: 200px;
+  background-color: deepskyblue;
+}
+
+.row-small-frame {
+  height: 166px;
+}

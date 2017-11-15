@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ListsComponent } from './lists.component';
 import { ListsRouting } from './lists.routing';
+import { GridModule } from './grid/grid.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ListsRouting
+    ListsRouting,
+    GridModule
   ],
   declarations: [
     ListsComponent
