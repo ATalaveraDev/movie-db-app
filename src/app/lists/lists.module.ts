@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ListsComponent } from './lists.component';
 import { ListsRouting } from './lists.routing';
 import { GridModule } from './grid/grid.module';
+import { ListDetailComponent } from './list-detail/list-detail.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { GridModule } from './grid/grid.module';
     GridModule
   ],
   declarations: [
-    ListsComponent
+    ListsComponent,
+    ListDetailComponent
   ]
 })
 export class ListsModule { }

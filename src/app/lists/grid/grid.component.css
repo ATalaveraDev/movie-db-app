@@ -1,13 +1,46 @@
 .row-big-frame {
   height: 298px;
   background-color: crimson;
+  cursor: pointer;
+}
+
+.row-big-frame div span {
+  line-height: 298px;
+  height: 298px;
+  font-size: 50px;
 }
 
 .row-medium-frame {
   height: 200px;
   background-color: deepskyblue;
+  cursor: pointer;
+}
+
+.row-medium-frame div span {
+  line-height: 200px;
+  height: 200px;
+  font-size: 40px;
 }
 
 .row-small-frame {
   height: 166px;
+  cursor: pointer;
+}
+
+.row-small-frame div span {
+  line-height: 166px;
+  height: 166px;
+  font-size: 35px;
+}
+
+.row-small-frame:nth-child(1) {
+  background-color: forestgreen;
+}
+
+.row-small-frame:nth-child(2) {
+  background-color: darkorange;
+}
+
+.row-small-frame:nth-child(3) {
+  background-color: darkblue;
 }

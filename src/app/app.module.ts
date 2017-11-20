@@ -8,7 +8,6 @@ import { MoviesModule } from './movies/movies.module';
 import { AppRoutingModule } from './app.routing.module';
 import { AuthenticatorModule } from './authenticator/authenticator.module';
 import { AppService } from './app.service';
-import { ShowsModule } from 'app/shows/shows.module';
 
 import { ListsModule } from './lists/lists.module';
 
@@ -23,8 +22,6 @@ import { ListsModule } from './lists/lists.module';
     MoviesModule,
     AuthenticatorModule,
     AppRoutingModule,
-    ShowsModule,
-
     ListsModule
   ],
   providers: [
