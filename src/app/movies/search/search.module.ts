@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SearchMoviesComponent } from './search.component';
-import { SearchService } from './search.service';
 import { SearchItemModule } from '../search-item/search-item.module';
+import { SearchService } from '../../search/search.service';
 
 @NgModule({
   imports: [

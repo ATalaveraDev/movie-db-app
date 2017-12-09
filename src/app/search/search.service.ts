@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Constants } from '../../app.constants';
-import { AppService } from '../../app.service';
 import { ReplaySubject } from 'rxjs';
-import { Movie } from '../list/movie/movie.model';
+
+import { AppService } from 'app/app.service';
+import { Constants } from 'app/app.constants';
+import { Item } from 'app/shared/item.model';
 
 @Injectable()
 export class SearchService {
-  private listSubject = new ReplaySubject<Movie>();
+  private listSubject = new ReplaySubject<Item>();
 
   list$ = this.listSubject.asObservable();
 
@@ -16,6 +17,11 @@ export class SearchService {
 
   searchMovie(value): void {
     this.http.get(Constants.END_POINT + '/search/movie' + '?api_key=' + this.appService.getApiKey() + '&query=' + value)
+      .subscribe((data: any) => this.listSubject.next(data.results));
+  }
+
+  search(value: string): void {
+    this.http.get(Constants.END_POINT + '/search/multi' + '?api_key=' + this.appService.getApiKey() + '&query=' + value)
       .subscribe((data: any) => this.listSubject.next(data.results));
   }
 }
