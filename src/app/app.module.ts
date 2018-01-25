@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { MoviesModule } from './movies/movies.module';
 import { AppRoutingModule } from './app.routing.module';
-import { AuthenticatorModule } from './authenticator/authenticator.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 import { AppService } from './app.service';
 
 import { ListsModule } from './lists/lists.module';
@@ -20,7 +20,7 @@ import { ListsModule } from './lists/lists.module';
     FormsModule,
     HttpClientModule,
     MoviesModule,
-    AuthenticatorModule,
+    AuthenticationModule,
     AppRoutingModule,
     ListsModule
   ],

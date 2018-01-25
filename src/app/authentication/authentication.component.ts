@@ -7,11 +7,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppService } from '../app.service';
 
 @Component({
-  selector: 'app-authenticator',
-  templateUrl: 'authenticator.component.html',
-  styleUrls: ['authenticator.component.css']
+  selector: 'app-authentication',
+  templateUrl: 'authentication.component.html',
+  styleUrls: ['authentication.component.css']
 })
-export class AuthenticatorComponent {
+export class AuthenticationComponent {
   private form: FormGroup;
   checkingAuthentication: Boolean;
 

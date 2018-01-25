@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthenticatorComponent } from './authenticator.component';
+import { AuthenticationComponent } from './authentication.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthenticationRoutingModule } from './authentication.routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthenticationRoutingModule
   ],
-  declarations: [
-    AuthenticatorComponent
-  ],
-  providers: [
-    CookieService
-  ]
+  declarations: [AuthenticationComponent],
+  providers: [ CookieService ]
 })
-export class AuthenticatorModule { }
+export class AuthenticationModule { }
