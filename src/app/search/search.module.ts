@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { SearchComponent } from './search.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+
+import { SearchRoutingModule } from './search.routing.module';
+import { SearchComponent } from './components/search.component';
 
 @NgModule({
+  imports: [
+    CommonModule,
+    SearchRoutingModule
+  ],
   declarations: [
     SearchComponent
-  ],
-  imports: [
-    BrowserModule
   ]
 })
 export class SearchModule { }

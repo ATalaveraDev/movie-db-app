@@ -13,6 +13,10 @@ const appRoutes: Routes = [
     component: AuthenticatorComponent
   },
   {
+    path: 'search',
+    loadChildren: './search/search.module#SearchModule'
+  },
+  {
     path: '',
     redirectTo: 'authenticate',
     pathMatch: 'full'
