@@ -19,7 +19,7 @@ export class AuthenticatorComponent {
     this.checkingAuthentication = true;
 
     if (this.cookieService.get('accountId') && this.cookieService.get('session') && this.cookieService.get('apiKey')) {
-      this.router.navigate(['/movies']);
+      this.router.navigate(['/lists']);
     } else {
       this.checkingAuthentication = false;
     }
@@ -43,7 +43,7 @@ export class AuthenticatorComponent {
       .subscribe(() => {
         this.appService.createUserAccount()
           .subscribe(() => {
-            this.router.navigate(['/movies']);
+            this.router.navigate(['/lists']);
           });
       });
   }

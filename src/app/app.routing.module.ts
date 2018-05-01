@@ -5,16 +5,16 @@ import { AuthenticatorComponent } from './authenticator/authenticator.component'
 
 const appRoutes: Routes = [
   {
-    path: 'movies',
-    loadChildren: './movies/movies.module#MoviesModule'
-  },
-  {
     path: 'authenticate',
     component: AuthenticatorComponent
   },
   {
     path: 'search',
     loadChildren: './search/search.module#SearchModule'
+  },
+  {
+    path: 'lists',
+    loadChildren: './lists/lists.module#ListsModule'
   },
   {
     path: '',

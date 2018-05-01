@@ -1,9 +1,0 @@
-<div [ngClass]="{'col-lg-12': !moviesService.movie$ | async, 'col-lg-6': moviesService.movie$ | async}">
-  <h1>List of movies</h1>
-  <ul class="list-group">
-    <app-movie *ngFor="let movie of moviesService.list$ | async; trackBy: tracker" (click)="onClickMovie(movie)" [movie]="movie"></app-movie>
-  </ul>
-</div>
-<div class="col-lg-6" *ngIf="moviesService.movie$ | async as movie">
-  <movie-detail [movie$]="movie"></movie-detail>
-</div>
