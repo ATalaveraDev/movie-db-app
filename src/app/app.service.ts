@@ -8,44 +8,51 @@ import { Session } from './app.session';
 import { Constants } from './app.constants';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class AppService {
   private session: Session;
   account: UserAccount;
   private apiKey: string;
-  private token: string;
 
-  constructor(private httpClient: HttpClient, private cookieService: CookieService) { }
+
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
+
+  createToken(apiToken: string): any {
+    this.cookieService.set('api_token', apiToken);
+
+    return this.http.post(`${environment.tmdb}/auth/request_token`, {redirect_to: 'http://localhost:4200/lists'}, this.httpHeaders());
+  }
+
+  private httpHeaders() {
+    return {
+      headers: {
+        Authorization: `Bearer ${this.cookieService.get('api_token')}`
+      }
+    };
+  }
+
+  setAuthenticationParams(requestToken: string): void {
+    this.cookieService.set('request_token', requestToken);
+  }
+
+  requestAccessToken(): any {
+    return this.http.post(`${environment.tmdb}/auth/access_token`, {request_token: this.cookieService.get('request_token')}, this.httpHeaders());
+  }
+
+
+
+
 
   getApiKey(): string {
     return this.cookieService.get('apiKey');
   }
 
-  setApiKey(key: string): void {
-    this.cookieService.set('apiKey', key);
-  }
 
-  createToken(key: string): Observable<any> {
-    return this.httpClient.get<any>(Constants.END_POINT + '/authentication/token/new?api_key=' + key)
-        .map(response => {
-          return response;
-        });
-  }
 
-  getToken(): string {
-    return this.cookieService.get('token');
-  }
-
-  setToken(token: string): void {
-    this.cookieService.set('token', token);
-  }
-
-  createSession(key, token): Observable<any> {
-    return this.httpClient.get<Session>(Constants.END_POINT + '/authentication/session/new?api_key=' + key + '&request_token=' + token)
-        .map(response => {
-          this.setSession(response);
-        });
+  setRequestToken(token) {
+    this.cookieService.set('request_token', token);
   }
 
   getSession(): Session {
@@ -58,7 +65,7 @@ export class AppService {
   }
 
   createUserAccount(): Observable<void> {
-    return this.httpClient.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + this.getApiKey() + '&session_id=' + this.getSession().session_id)
+    return this.http.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + this.getApiKey() + '&session_id=' + this.getSession().session_id)
       .map(response => {
         this.setAccount(response);
       });
@@ -70,6 +77,7 @@ export class AppService {
 
   setAccount(account: UserAccount): void {
     this.account = account;
+    console.log(account)
     this.cookieService.set('accountId', account.id.toString());
   }
 }

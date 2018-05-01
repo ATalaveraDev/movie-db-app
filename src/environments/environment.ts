@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  tmdb: 'https://api.themoviedb.org/3/'
+  tmdb: 'https://api.themoviedb.org/4'
 };

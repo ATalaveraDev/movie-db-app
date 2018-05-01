@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListsRoutingModule } from './lists.routing.module';
 import { ListsPageComponent } from './components/lists-page/lists-page.component';
 import { SearchService } from './services/search.service';
+import { ListsService } from './services/lists.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import { SearchService } from './services/search.service';
     ListsRoutingModule
   ],
   declarations: [ListsPageComponent],
-  providers: [SearchService]
+  providers: [
+    SearchService,
+    ListsService
+  ]
 })
 export class ListsModule { }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { SearchService } from '../../services/search.service';
+import { ListsService } from '../../services/lists.service';
+import { AppService } from '../../../app.service';
 
 @Component({
   templateUrl: './lists-page.component.html'
@@ -9,9 +11,13 @@ import { SearchService } from '../../services/search.service';
 export class ListsPageComponent {
   searchForm: FormGroup;
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, private listsService: ListsService, private appService: AppService) {
     this.searchForm =  new FormGroup({
       title: new FormControl('', [Validators.required])
+    });
+
+    this.appService.requestAccessToken().subscribe(res => {
+      this.listsService.getAll(res.account_id).subscribe(res => console.log(res));
     });
   }
 
