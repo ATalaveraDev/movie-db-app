@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { AppService } from '../../app.service';
+import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class SearchService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private appService: AppService) { }
 
-  byTitle(): void {
-    this.http.get('https://api.themoviedb.org/3/search/multi?api_key=&query=');
+  byTitle(title: string): any {
+    return this.http.get(`${environment.tmdb}search/tv?api_key=${this.appService.getApiKey()}&query=${title}`);
   }
 }
