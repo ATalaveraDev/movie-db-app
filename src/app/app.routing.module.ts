@@ -9,6 +9,10 @@ const appRoutes: Routes = [
     component: AuthenticatorComponent
   },
   {
+    path: 'token',
+    loadChildren: './token/token.module#TokenModule'
+  },
+  {
     path: 'search',
     loadChildren: './search/search.module#SearchModule'
   },

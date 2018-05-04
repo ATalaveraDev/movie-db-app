@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import 'rxjs/add/operator/map';
-import { CookieService } from 'ngx-cookie-service';
 
 import { AppService } from '../app.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authenticator',
@@ -14,17 +13,18 @@ import { AppService } from '../app.service';
 export class AuthenticatorComponent {
   private form: FormGroup;
 
-  constructor(private appService: AppService, private router: Router, private route: ActivatedRoute, private cookieService: CookieService) {
-    this.form = new FormGroup({
-      key: new FormControl('', Validators.required)
-    });
+  constructor(private appService: AppService, private cookieService: CookieService, private router: Router) {
+    if (this.cookieService.get('api_token') && this.cookieService.get('request_token')) {
+      this.router.navigate(['lists']);
+    }
+    else {
+      this.form = new FormGroup({
+        key: new FormControl('', Validators.required)
+      });
+    }
   }
 
   onSubmit(): void {
-    this.appService.createToken(this.form.value.key).subscribe(response => {
-      // this.appService.setRequestToken(response.request_token);
-      this.appService.setAuthenticationParams(response.request_token);
-      window.location.href = 'https://www.themoviedb.org/auth/access?request_token=' + response.request_token;
-    });
+    this.appService.requestTokenAndRedirect(this.form.value.key, 'token');
   }
 }

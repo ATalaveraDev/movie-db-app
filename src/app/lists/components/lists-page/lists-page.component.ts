@@ -16,9 +16,7 @@ export class ListsPageComponent {
       title: new FormControl('', [Validators.required])
     });
 
-    this.appService.requestAccessToken().subscribe(res => {
-      this.listsService.getAll(res.account_id).subscribe(res => console.log(res));
-    });
+    this.listsService.getAll(this.appService.account_id).subscribe(res => console.log(res));
   }
 
   search(): void {

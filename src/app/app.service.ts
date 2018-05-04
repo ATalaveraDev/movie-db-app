@@ -9,6 +9,7 @@ import { Constants } from './app.constants';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class AppService {
@@ -16,16 +17,50 @@ export class AppService {
   account: UserAccount;
   private apiKey: string;
 
+  private authEndpoint: string;
+  private accessGrantedSubject: ReplaySubject<boolean>;
+  accessGranted$: Observable<boolean>;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  accessToken: string;
+  account_id: string;
 
-  createToken(apiToken: string): any {
-    this.cookieService.set('api_token', apiToken);
-
-    return this.http.post(`${environment.tmdb}/auth/request_token`, {redirect_to: 'http://localhost:4200/lists'}, this.httpHeaders());
+  constructor(private http: HttpClient, private cookieService: CookieService) {
+    this.accessGrantedSubject = new ReplaySubject<boolean>();
+    this.accessGranted$ = this.accessGrantedSubject.asObservable();
+    this.authEndpoint = `${environment.tmdb}/auth`;
   }
 
-  private httpHeaders() {
+  requestTokenAndRedirect(apiToken: string, path: string): void {
+    this.cookieService.set('api_token', apiToken);
+
+    this.http.post(`${this.authEndpoint}/request_token`, {redirect_to: `http://localhost:4200/${path}`}, this.httpHeaders())
+      .subscribe((response: any) => {
+        this.setRequestToken(response.request_token);
+        window.location.href = 'https://www.themoviedb.org/auth/access?request_token=' + response.request_token;
+      });
+  }
+
+  setRequestToken(requestToken: string): void {
+    this.cookieService.set('request_token', requestToken);
+  }
+
+  requestAccessToken(): void {
+    this.http.post(`${this.authEndpoint}/access_token`, {request_token: this.cookieService.get('request_token')}, this.httpHeaders())
+      .subscribe((response: any) => {
+        if (response.success) {
+          this.setAccessInfo(response);
+        }
+
+        this.accessGrantedSubject.next(response.success);
+      });
+  }
+
+  setAccessInfo(values: any): void {
+    this.accessToken = values.access_token;
+    this.account_id = values.account_id;
+  }
+
+  httpHeaders() {
     return {
       headers: {
         Authorization: `Bearer ${this.cookieService.get('api_token')}`
@@ -33,26 +68,11 @@ export class AppService {
     };
   }
 
-  setAuthenticationParams(requestToken: string): void {
-    this.cookieService.set('request_token', requestToken);
-  }
-
-  requestAccessToken(): any {
-    return this.http.post(`${environment.tmdb}/auth/access_token`, {request_token: this.cookieService.get('request_token')}, this.httpHeaders());
-  }
-
-
 
 
 
   getApiKey(): string {
     return this.cookieService.get('apiKey');
-  }
-
-
-
-  setRequestToken(token) {
-    this.cookieService.set('request_token', token);
   }
 
   getSession(): Session {

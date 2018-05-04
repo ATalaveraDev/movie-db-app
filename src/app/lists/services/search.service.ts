@@ -9,6 +9,6 @@ export class SearchService {
   constructor(private http: HttpClient, private appService: AppService) { }
 
   byTitle(title: string): any {
-    return this.http.get(`${environment.tmdb}search/tv?api_key=${this.appService.getApiKey()}&query=${title}`);
+    return this.http.get(`${environment.tmdb}/search/tv?query=${title}`, this.appService.httpHeaders());
   }
 }
