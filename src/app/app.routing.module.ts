@@ -13,10 +13,6 @@ const appRoutes: Routes = [
     loadChildren: './token/token.module#TokenModule'
   },
   {
-    path: 'search',
-    loadChildren: './search/search.module#SearchModule'
-  },
-  {
     path: 'lists',
     loadChildren: './lists/lists.module#ListsModule'
   },

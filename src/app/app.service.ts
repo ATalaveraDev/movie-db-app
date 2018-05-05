@@ -71,37 +71,4 @@ export class AppService {
   getAccountId(): string {
     return this.cookieService.get('account_id');
   }
-
-
-
-
-  getApiKey(): string {
-    return this.cookieService.get('apiKey');
-  }
-
-  getSession(): Session {
-    return this.session;
-  }
-
-  setSession(session: Session): void {
-    this.session = session;
-    this.cookieService.set('session', session.session_id);
-  }
-
-  createUserAccount(): Observable<void> {
-    return this.http.get<UserAccount>(Constants.END_POINT + '/account?api_key=' + this.getApiKey() + '&session_id=' + this.getSession().session_id)
-      .map(response => {
-        this.setAccount(response);
-      });
-  }
-
-  getAccount(): UserAccount {
-    return this.account;
-  }
-
-  setAccount(account: UserAccount): void {
-    this.account = account;
-    console.log(account)
-    this.cookieService.set('accountId', account.id.toString());
-  }
 }
