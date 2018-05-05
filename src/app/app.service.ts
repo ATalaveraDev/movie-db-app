@@ -1,22 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/toPromise';
-
-import { UserAccount } from './app.user.account';
-import { Session } from './app.session';
-import { Constants } from './app.constants';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../environments/environment';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { CookieService } from 'ngx-cookie-service';
+
+import { environment } from '../environments/environment';
+import { HttpOptions } from './models/http-options.model';
 
 @Injectable()
 export class AppService {
-  private session: Session;
-  account: UserAccount;
-  private apiKey: string;
-
   private authEndpoint: string;
   private accessGrantedSubject: ReplaySubject<boolean>;
   accessGranted$: Observable<boolean>;
@@ -60,7 +53,7 @@ export class AppService {
     this.cookieService.set('account_id', values.account_id);
   }
 
-  httpHeaders() {
+  httpHeaders(): HttpOptions {
     return {
       headers: {
         Authorization: `Bearer ${this.cookieService.get('api_token')}`
