@@ -57,7 +57,7 @@ export class AppService {
 
   setAccessInfo(values: any): void {
     this.accessToken = values.access_token;
-    this.account_id = values.account_id;
+    this.cookieService.set('account_id', values.account_id);
   }
 
   httpHeaders() {
@@ -66,6 +66,10 @@ export class AppService {
         Authorization: `Bearer ${this.cookieService.get('api_token')}`
       }
     };
+  }
+
+  getAccountId(): string {
+    return this.cookieService.get('account_id');
   }
 
 
