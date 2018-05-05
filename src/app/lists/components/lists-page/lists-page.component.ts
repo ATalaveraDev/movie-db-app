@@ -16,7 +16,8 @@ export class ListsPageComponent {
       title: new FormControl('', [Validators.required])
     });
 
-    this.route.data.subscribe((data: Data) => this.listsService.getAll(data.accountId).subscribe(res => console.log(res)));
+    this.route.data.subscribe((data: Data) => this.listsService.getAll(data.accountId)
+      .subscribe(res => console.log(res)));
   }
 
   search(): void {
